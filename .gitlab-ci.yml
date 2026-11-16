@@ -1,0 +1,39 @@
+# La suite en verde es condición de merge (constitución, principio VI y «Flujo de trabajo»).
+image: mcr.microsoft.com/playwright:v1.65.1-noble
+
+stages:
+  - test
+
+variables:
+  POSTGRES_USER: citaclara
+  POSTGRES_PASSWORD: citaclara
+  POSTGRES_DB: citaclara_test
+  DATABASE_URL: postgres://citaclara:citaclara@postgres:5432/citaclara_test
+  DATABASE_URL_TEST: postgres://citaclara:citaclara@postgres:5432/citaclara_test
+  SESION_SECRETO: secreto-de-integracion-continua-con-mas-de-32-caracteres
+  CI: 'true'
+
+pruebas:
+  stage: test
+  services:
+    - name: postgres:17
+      alias: postgres
+  cache:
+    key:
+      files: [pnpm-lock.yaml]
+    paths: [.pnpm-store]
+  before_script:
+    - corepack enable
+    - pnpm config set store-dir .pnpm-store
+    - pnpm install --frozen-lockfile
+  script:
+    - pnpm db:migrate
+    - pnpm test
+    - pnpm test:e2e
+  artifacts:
+    when: on_failure
+    paths: [test-results/, playwright-report/]
+    expire_in: 1 week
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH

@@ -1,0 +1,14 @@
+services:
+  postgres:
+    image: postgres:17
+    environment:
+      POSTGRES_USER: citaclara
+      POSTGRES_PASSWORD: citaclara
+      POSTGRES_DB: citaclara
+    ports:
+      - "5432:5432"
+    volumes:
+      - citaclara-datos:/var/lib/postgresql/data
+      - ./docker/crear-bd-pruebas.sql:/docker-entrypoint-initdb.d/crear-bd-pruebas.sql:ro
+volumes:
+  citaclara-datos:

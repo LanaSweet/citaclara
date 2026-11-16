@@ -183,6 +183,7 @@ El producto puede cargarse con una semilla determinista: misma semilla, misma hi
 - Una clínica tiene una única clave de panel; no hay cuentas de usuario individuales en la v1.
 - La zona horaria es siempre Europa/Madrid; el producto no gestiona clínicas en otras zonas.
 - El horario de atención es de lunes a viernes de 09:00 a 20:00 para todos los profesionales de la demo. La gestión de horarios y ausencias propias queda para una spec posterior; en esta feature el horario es fijo.
+- Una cita puede terminar exactamente a las 20:00 (el horario es el intervalo cerrado 09:00–20:00 para el fin). Un servicio cuya duración no cabe en el horario se rechaza en el momento de reservar (`FUERA_DE_HORARIO`), no al cargarlo.
 - Las citas empiezan en cualquier minuto dentro del horario (no se fuerzan tramos de 15 o 30 minutos).
 - Las altas y modificaciones de clínica, profesionales, servicios y pacientes se hacen mediante la carga de datos; esta feature no incluye pantallas ni flujos para darlos de alta o administrarlos, tampoco el alta de pacientes desde la reserva (queda para otra spec).
 - No se contempla reprogramar una cita: se cancela y se reserva otra.

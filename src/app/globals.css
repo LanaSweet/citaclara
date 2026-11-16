@@ -1,0 +1,39 @@
+@import 'tailwindcss';
+
+/* Tokens de diseño (solo modo claro; contraste AA). */
+@theme {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --color-fondo: #f6f7fb;
+  --color-superficie: #ffffff;
+  --color-texto: #0f172a;
+  --color-texto-suave: #475569;
+  --color-borde: #94a3b8;
+  --color-primario: #4338ca;
+  --color-primario-fuerte: #3730a3;
+  --color-primario-texto: #ffffff;
+  --color-libre: #ecfdf5;
+  --color-libre-borde: #047857;
+  --color-peligro: #b91c1c;
+  --color-peligro-fondo: #fef2f2;
+  --color-aviso: #92400e;
+  --color-aviso-fondo: #fffbeb;
+  --color-ok: #065f46;
+  --color-ok-fondo: #ecfdf5;
+  --radius-tarjeta: 0.875rem;
+  --shadow-suave: 0 1px 2px rgb(15 23 42 / 0.06), 0 4px 12px rgb(15 23 42 / 0.06);
+}
+
+html {
+  background: var(--color-fondo);
+  color: var(--color-texto);
+}
+body {
+  min-height: 100dvh;
+  font-family: var(--font-sans);
+  background: var(--color-fondo);
+  color: var(--color-texto);
+}
+:focus-visible {
+  outline: 3px solid var(--color-primario);
+  outline-offset: 2px;
+}
